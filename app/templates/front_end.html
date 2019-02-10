@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Front End</title>
+  <style type="text/css">
+    div {
+      padding-top: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Covering Array generation</h1>
+  <div>
+    Number of Interactions:
+  </div>
+  <input type="text" id="interactions"/>
+  <div>
+    Number of Columns:
+  </div>
+  <input type="number" id="columns"/>
+  <div>
+    Level of Columns:
+  </div>
+  <input type="number" id="level"/>r
+  <input type="button" id="run"/>
+  <div id="response">
+    
+  </div>
+  <script type="text/javascript">
+    var response = "";
+    document.getElementById("run").addEventListener("click", function(){
+      url = "http://127.0.0.1:5000/calc"
+      console.log("Button Pressed");
+      var xhr = new XMLHttpRequest();
+      var inter = document.getElementById("interactions").value;
+      var cols = document.getElementById("columns").value;
+      var level = document.getElementById("level").value;
+      var k_level = "";
+      for( i = 1; i < parseInt(cols); i++ )
+      {
+        k_level = k_level + level + ",";
+      }
+      k_level = k_level + level;
+      //alert(k_level);
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+          document.getElementById('response').innerHTML = xhr.response;
+        }
+      }
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      response = xhr.response;
+      xhr.send(JSON.stringify({
+        k_level: k_level,
+        num_inter: inter
+      }));
+    });
+  </script>
+</body>
+</html>
+
