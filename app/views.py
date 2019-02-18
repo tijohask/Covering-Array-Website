@@ -15,7 +15,8 @@ def index():
 def calc():
   data = request.get_json()
   print(request.data)
-  print(switch(data["k_level"], data["num_inter"], 4))
-  return switch(data["k_level"], data["num_inter"], 4)
+  give = switch(data["k_level"], data["num_inter"], 4) 
+  print(give)
+  return give
 #request.data
 #switch(request.data["k_level"], request.data["num_inter"], 4)
