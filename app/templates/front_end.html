@@ -4,7 +4,11 @@
   <title>Front End</title>
   <style type="text/css">
     div {
-      padding-top: 1.5em;
+      padding-top: 1.25em;
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
     }
   </style>
 </head>
@@ -18,14 +22,12 @@
     Number of Columns:
   </div>
   <input type="number" id="columns"/>
-  <div>
+  <!--<div>
     Level of Columns:
   </div>
-  <input type="number" id="level"/>r
-  <input type="button" id="run"/>
-  <div id="response">
-    
-  </div>
+  <input type="number" id="level"/>-->
+  <div><input type="button" id="run" value="run"/></div>
+  <div><textarea id="response" cols="50", rows="40"></textarea></div>
   <script type="text/javascript">
     var response = "";
     document.getElementById("run").addEventListener("click", function(){
@@ -34,7 +36,7 @@
       var xhr = new XMLHttpRequest();
       var inter = document.getElementById("interactions").value;
       var cols = document.getElementById("columns").value;
-      var level = document.getElementById("level").value;
+      var level = 2; //document.getElementById("level").value;
       var k_level = "";
       for( i = 1; i < parseInt(cols); i++ )
       {
@@ -49,7 +51,7 @@
       }
       xhr.open("POST", url, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
-      response = xhr.response;
+      //response = xhr.response;
       xhr.send(JSON.stringify({
         k_level: k_level,
         num_inter: inter
@@ -58,4 +60,3 @@
   </script>
 </body>
 </html>
-
